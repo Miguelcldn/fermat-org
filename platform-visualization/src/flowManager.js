@@ -10,6 +10,13 @@ function FlowManager(){
         actualFlow = null;
 
     // Public method
+    this.getObjHeaderFlow = function(){ 
+        return headerFlow;
+    };
+
+    this.getpositionHeaderFlow = function(){ 
+        return positionHeaderFlow;
+    };
     /**
      * @author Emmanuel Colina
      * Set position for each Header Flow
@@ -192,7 +199,9 @@ function FlowManager(){
                 var p = processes, objectHeaderInWFlowGroup;
 
                 for(var i = 0; i < p.length; i++){
-                    headerFlow.push(new ActionFlow(p[i]));
+                    
+                    if(window.platforms[p[i].platfrm])
+                        headerFlow.push(new ActionFlow(p[i]));
                 }
                 objectHeaderInWFlowGroup = window.headers.getPositionHeaderViewInFlow();
                 calculatePositionHeaderFLow(headerFlow, objectHeaderInWFlowGroup);
@@ -232,7 +241,9 @@ function FlowManager(){
                headerFlow[id].showSteps();
             }, 1000);
 
+            window.buttonsManager.removeAllButtons();
             window.helper.showBackButton();
+            window.workFlowEdit.addButton(id);
         }
     };
 
