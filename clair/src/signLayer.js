@@ -167,21 +167,36 @@ function SignLayer(){
 		return mesh;
 	};
 
-	this.transformSignLayer = function(){
-		
-		var duration = 3000;
+	this.transformSignLayer = function(name,option){
+        
+        var duration = 5000;
 
-		for(var i = 0, l = objects.length; i < l; i++) {
-            new TWEEN.Tween(objects[i].position)
-            .to({
-                x : positions.target[i].x,
-                y : positions.target[i].y,
-                z : positions.target[i].z
-            }, Math.random() * duration + duration)
-            .easing(TWEEN.Easing.Exponential.InOut)
-            .start();
+        for(var i = 0, l = objects.length; i < l; i++) {
+            var res = objects[i].name.slice(0,3);
+            if(res === name){
+                if(option === 'set'){
+                    new TWEEN.Tween(objects[i].position)
+                    .to({
+                        x : positions.target[i].x,
+                        y : positions.target[i].y,
+                        z : positions.target[i].z
+                    }, Math.random() * duration + duration)
+                    .easing(TWEEN.Easing.Exponential.InOut)
+                    .start();
+                }
+                else{
+                    new TWEEN.Tween(objects[i].position)
+                    .to({
+                        x : positions.lastTarget[i].x,
+                        y : positions.lastTarget[i].y,
+                        z : positions.lastTarget[i].z
+                    }, Math.random() * duration + duration)
+                    .easing(TWEEN.Easing.Exponential.InOut)
+                    .start();
+                }
+            }
         }
-	};
+    };
 
 	this.letAloneSignLayer = function(){
 

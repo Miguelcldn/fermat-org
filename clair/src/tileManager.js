@@ -577,13 +577,12 @@ function TileManager() {
      * @param {Array}  goal     Member of ViewManager.targets
      * @param {Number} duration Milliseconds of animation
      */
-    this.transform = function (ordered, duration) {
+    this.transform = function (duration) {
 
         var i, l, j,
             DELAY = 500;
 
-        duration = duration || 2000;
-        ordered = ordered || false;
+        duration = duration || 1000;
 
         //TWEEN.removeAll();
 
@@ -615,33 +614,20 @@ function TileManager() {
             return move;
         };
 
-        if(ordered === true) {
+        for(i = 0; i < self.elementsByGroup.length; i++) {
 
-            for(i = 0; i < self.elementsByGroup.length; i++) {
+            var k = (i + self.elementsByGroup.length - 1) % (self.elementsByGroup.length);
+            var delay = i * DELAY;
 
-                var k = (i + self.elementsByGroup.length - 1) % (self.elementsByGroup.length);
-                var delay = i * DELAY;
-
+            if(window.headers.status[k] === 'on'){
                 for(j = 0; j < self.elementsByGroup[k].length; j++) {
 
                     var index = self.elementsByGroup[k][j];
-
                     var target = window.helper.getSpecificTile(index);
-
                     var animation = animate(target.mesh, target.target.show, delay);
-
                     animation.start();
-                    
+     
                 }
-            }
-        }
-        else {
-
-            for(var r = 0; r < window.tilesQtty.length; r++){
-
-                var tile = window.helper.getSpecificTile(window.tilesQtty[r]);
-
-                animate(tile.mesh, tile.target.show, 0).start();
             }
         }
 
@@ -657,8 +643,6 @@ function TileManager() {
             .to({}, duration * 2 + self.elementsByGroup * DELAY)
             .onUpdate(render)
             .start();
-
-        setTimeout(window.screenshotsAndroid.show, duration);
     };
 
     /**
@@ -977,5 +961,54 @@ function TileManager() {
             }
         }
         return dev;
+    }
+
+    this.materialize = function (visibility, id){
+
+        var noitamina = function(object, target, delay) {
+
+            delay = delay || 0;
+
+            var duration = 2000;
+
+             var move = new TWEEN.Tween(object.position)
+                        .to({
+                            x: target.position.x,
+                            y: target.position.y,
+                            z: target.position.z
+                        }, Math.random() * duration + duration)
+                        .easing(TWEEN.Easing.Exponential.InOut)
+                        .delay(delay)
+                        .onUpdate(render)
+                        .onComplete(function() { object.userData.flying = false; });
+
+            var rotation = new TWEEN.Tween(object.rotation)
+                            .to({
+                                x: target.rotation.x,
+                                y: target.rotation.y,
+                                z: target.rotation.z
+                            }, Math.random() * duration + duration)
+                            .delay(delay)
+                            .onUpdate(render)
+                            .easing(TWEEN.Easing.Exponential.InOut);
+
+            move.onStart(function() { rotation.start(); });
+
+            return move;
+        };
+
+        var delay = 500;
+        
+        for(var j = 0; j < self.elementsByGroup[id].length; j++) {
+            var index = self.elementsByGroup[id][j];
+            var target = window.helper.getSpecificTile(index);
+
+            if(visibility === 'show')
+                var animation = noitamina(target.mesh, target.target.show, delay);
+            else
+                var animation = noitamina(target.mesh, target.target.hide, delay);
+
+            animation.start();   
+        }
     }
 }

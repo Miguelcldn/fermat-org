@@ -58,11 +58,7 @@ function ViewManager() {
                         window.tableEdit.addButton();
 
                         window.tileManager.transform(true, 3000 + transition);
-
-                        setTimeout(function(){
-                            window.signLayer.transformSignLayer();
-                         }, 9500);
-
+                        
                         //Special: If coming from home, delay the animation
                         if(window.actualView === 'home')
                             transition = transition + 3000;
@@ -72,31 +68,18 @@ function ViewManager() {
                         window.developer.delete();
                     };
 
-                    backButton = function() {
-
+                    backButton = function() {   
                         window.changeView();
-
-                        setTimeout(function(){
-                            window.signLayer.transformSignLayer();
-                        }, 2500);
-
-                        window.developer.delete();
-                    };
+                    };  
 
                     exit = function() {
+                        window.headers.hideTable();
                         window.tileManager.rollBack();
-
                         buttonsManager.removeAllButtons();
                     };
 
                     reset = function() {
                         window.tileManager.rollBack();
-
-                        window.headers.transformTable(2000);
-
-                        setTimeout(function(){
-                            window.signLayer.transformSignLayer();
-                         }, 3000);
                     };
 
                     break;

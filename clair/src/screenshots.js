@@ -51,8 +51,6 @@ function ScreenshotsAndroid() {
 						self.objects.target[i].show.x = target.x;
 						self.objects.target[i].show.y = target.y;
 						self.objects.target[i].show.z = target.z;
-
-						animate(mesh, target.show);
 					}
 				}
 			}
