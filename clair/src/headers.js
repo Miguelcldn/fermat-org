@@ -24,6 +24,7 @@ function Headers(columnWidth, superLayerMaxHeight, groupsQtty, layersQtty, super
         },
         self = this,
         graph = {},
+        status = [],
         arrows = [];
 
     var width = columnWidth * window.TILE_DIMENSION.width;
@@ -32,13 +33,68 @@ function Headers(columnWidth, superLayerMaxHeight, groupsQtty, layersQtty, super
     this.dep = dependencies;
     this.arrows = arrows;
     this.arrowPositions = arrowsPositions;
+    this.status = status;
 
     var onClick = function(target) {
         if(window.actualView === 'workflows'){
             window.buttonsManager.removeAllButtons();
             onElementClickHeader(target.userData.id, objects);
         }
+        if(window.actualView === 'table'){
+            if(status.length === 0){
+                tileVisibility(target.userData.id, 'show');
+                status[target.userData.id] = 'on';
+            }
+            else{
+                if(status[target.userData.id] === 'on'){
+                    tileVisibility(target.userData.id, 'hide');
+                    status[target.userData.id] = 'off';
+                    self.signs();
+                }
+                else{
+                    tileVisibility(target.userData.id, 'show');
+                    status[target.userData.id] = 'on';
+                }
+            }
+            self.signs();
+        }
     };
+
+    this.hideTable = function(){
+        for(i = 0, l = objects.length; i < l; i++){
+            if(status[i] === 'on'){
+                tileVisibility(i, 'hide');
+                status[i] = 'off';
+            }
+        }
+        self.signs();
+    }
+
+    this.createComp = function(id){
+        var res = id.slice(0,3);
+        for(i = 0, l = objects.length; i < l; i++){
+            if(objects[i].name === res){
+                if(status[i] === 'off'){
+                    tileVisibility(i, 'show');
+                    status[i] = 'on';
+                    self.signs();
+                }
+            }
+        }
+    }
+
+    this.signs = function(){
+        for(i = 0, l = objects.length; i < l; i++){
+            if(status[i] === 'on')
+                window.signLayer.transformSignLayer(objects[i].name, 'set');
+            else
+                window.signLayer.transformSignLayer(objects[i].name, 'remove');
+        }
+    }
+
+    function tileVisibility(id, visibility){
+        window.tileManager.materialize(visibility, id);
+    }
 
     function onElementClickHeader(id, objects)
     {
@@ -745,6 +801,9 @@ function Headers(columnWidth, superLayerMaxHeight, groupsQtty, layersQtty, super
                 createChildren(slayer, headerData.dependsOn);
             }
         }
+
+        for(i = 0, l = objects.length; i < l; i++)
+            status.push('off');
 
         buildGraph();
         calculateStackPositions();

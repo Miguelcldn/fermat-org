@@ -369,9 +369,7 @@ function TableEdit() {
                     window.camera.move(target.show.position.x, target.show.position.y, target.show.position.z + 8000, 3000);
 
                     animate(mesh, target.show, 3500, function(){
-
                         window.screenshotsAndroid.hidePositionScreenshots(platform, layer); 
-                        window.tileManager.updateElementsByGroup();
                     });
 
                     setTimeout( function() {
@@ -387,7 +385,7 @@ function TableEdit() {
                     }, 2000 );
                             
                     window.TABLE[platform].layers[layer].objects.push(object);
-
+                    window.tileManager.updateElementsByGroup();
                 });
             },
             function(){
@@ -557,9 +555,7 @@ function TableEdit() {
 
                             positionCameraX = window.TABLE[newGroup].x;
                             positionCameraY = transformPositionY(window.helper.getPositionYLayer(newLayer));
-
                             camera.move(positionCameraX, positionCameraY,8000, 2000);
-
                             createNewElementTile(table);
                             window.screenshotsAndroid.hidePositionScreenshots(newGroup, newLayer);
                             window.tileManager.updateElementsByGroup();
@@ -844,9 +840,7 @@ function TableEdit() {
 
                     var target =  window.helper.fillTarget(0, 0, 160000, 'table');
 
-                    animate(mesh, target.hide, 1500, function(){
-                        window.scene.remove(mesh);
-                    });
+                    window.scene.remove(mesh);
 
                     arrayObject.splice(id, 1);
 

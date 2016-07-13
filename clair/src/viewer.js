@@ -253,8 +253,9 @@ function changeView() {
     window.workFlowManager.getActualFlow();
 
     window.headers.transformTable(1500);
+    window.headers.signs();
 
-    window.tileManager.transform(1500);
+    window.tileManager.transform(800);
 
 }
 
