@@ -79,7 +79,7 @@ function ViewManager() {
                     };
 
                     reset = function() {
-                        window.tileManager.rollBack();
+                        //window.tileManager.rollBack();
                     };
 
                     break;

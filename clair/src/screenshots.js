@@ -196,7 +196,6 @@ function ScreenshotsAndroid() {
 	        	}
 	        }
 	        setScreenshot();
-	        console.log(self.objects.title.length);
     	});
 	};
     
@@ -411,8 +410,6 @@ function ScreenshotsAndroid() {
 			mesh : mesh,
 			target : target
 		};
-
-		console.log(target);
 	}
 
 	/**
@@ -586,7 +583,6 @@ function ScreenshotsAndroid() {
 			_countControl = countControl(wallet),
 			x = POSITION_X;
 
-		console.log(wallet);
 		titleVisibility(wallet, mesh, 'show');
 			
 		target = window.helper.fillTarget(mesh.position.x - (x / 2), mesh.position.y, mesh.position.z, 'table');

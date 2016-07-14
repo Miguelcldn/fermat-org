@@ -143,7 +143,7 @@ function init() {
     headers = new Headers(dimensions.columnWidth, dimensions.superLayerMaxHeight, dimensions.groupsQtty,
                           dimensions.layersQtty, dimensions.superLayerPosition);
 
-    // uncomment for testing
+    // uncomment for performance testing
     //create_stats();
 
     $('#backButton').click(function() {

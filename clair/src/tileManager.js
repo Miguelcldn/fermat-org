@@ -624,7 +624,7 @@ function TileManager() {
 
                     var index = self.elementsByGroup[k][j];
                     var target = window.helper.getSpecificTile(index);
-                    var animation = animate(target.mesh, target.target.show, delay);
+                    var animation = animate(target.mesh, target.target.show, 0);
                     animation.start();
      
                 }
@@ -971,7 +971,7 @@ function TileManager() {
 
             delay = delay || 0;
 
-            var duration = 2000;
+            var duration = 4000;
 
              var move = new TWEEN.Tween(object.position)
                         .to({
@@ -981,7 +981,6 @@ function TileManager() {
                         }, Math.random() * duration + duration)
                         .easing(TWEEN.Easing.Exponential.InOut)
                         .delay(delay)
-                        .onUpdate(render)
                         .onComplete(function() { object.userData.flying = false; });
 
             var rotation = new TWEEN.Tween(object.rotation)
@@ -991,7 +990,6 @@ function TileManager() {
                                 z: target.rotation.z
                             }, Math.random() * duration + duration)
                             .delay(delay)
-                            .onUpdate(render)
                             .easing(TWEEN.Easing.Exponential.InOut);
 
             move.onStart(function() { rotation.start(); });
@@ -1004,7 +1002,6 @@ function TileManager() {
         for(var j = 0; j < self.elementsByGroup[id].length; j++) {
             var index = self.elementsByGroup[id][j];
             var target = window.helper.getSpecificTile(index);
-
             if(visibility === 'show')
                 var animation = noitamina(target.mesh, target.target.show, delay);
             else
@@ -1012,5 +1009,10 @@ function TileManager() {
 
             animation.start();   
         }
+
+        new TWEEN.Tween(this)
+            .to({}, 4000 * 2 + self.elementsByGroup * 500)
+            .onUpdate(render)
+            .start();
     }
 }

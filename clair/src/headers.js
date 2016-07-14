@@ -49,14 +49,17 @@ function Headers(columnWidth, superLayerMaxHeight, groupsQtty, layersQtty, super
                 if(status[target.userData.id] === 'on'){
                     tileVisibility(target.userData.id, 'hide');
                     status[target.userData.id] = 'off';
-                    self.signs();
                 }
                 else{
                     tileVisibility(target.userData.id, 'show');
                     status[target.userData.id] = 'on';
                 }
             }
-            self.signs();
+            
+            setTimeout(function(){
+                self.signs();
+            }, 2000);
+            
         }
     };
 
