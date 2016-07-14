@@ -6,13 +6,14 @@ function ScreenshotsAndroid() {
 
 	// Public Variables
     this.objects = {
-			mesh : [],
-			target : [],
-			texture : [],
-			title : { mesh : {},
-					  texture : {}
-					}			
-		};
+		mesh : [],
+		target : [],
+		texture : [],
+		title : {
+			mesh : {},
+			texture : {}
+		}			
+	};
 		
     // Private Variables
 	var self = this,
@@ -195,6 +196,7 @@ function ScreenshotsAndroid() {
 	        	}
 	        }
 	        setScreenshot();
+	        console.log(self.objects.title.length);
     	});
 	};
     
@@ -203,18 +205,11 @@ function ScreenshotsAndroid() {
 	* Wallet hidden from view.
 	*/ 
 	this.hide = function() {
-
-		var ignore;
-
-		if(action.state)
-			ignore = action.mesh;
-
-		for(var i = 0; i < self.objects.mesh.length; i++) { 
-
-			if(i != ignore)  
-				animate(self.objects.mesh[i], self.objects.target[i].hide, 800);
+		for(var i = 0; i < self.objects.mesh.length; i++){
+			animate(self.objects.mesh[i], self.objects.target[i].hide, 800);
+			titleVisibility(self.objects.mesh[i].userData.wallet, self.objects.mesh[i], 'hide');
 		}
-	}; 
+	};
 
 	/**
 	* @author Ricardo Delgado
@@ -225,11 +220,8 @@ function ScreenshotsAndroid() {
         if(action.state)
 			resetTexture(action.mesh);
 		else {
-			
-			for(var i = 0; i < self.objects.mesh.length; i++) {
-
+			for(var i = 0; i < self.objects.mesh.length; i++)
 				animate(self.objects.mesh[i], self.objects.target[i].show, 1500);
-			}
 		}
 	};
     
@@ -400,7 +392,7 @@ function ScreenshotsAndroid() {
 		var mesh = new THREE.Mesh(
 					new THREE.PlaneGeometry(70, 15),
 					new THREE.MeshBasicMaterial({ map: texture, side: THREE.FrontSide, transparent: true })
-					);
+				);
 
 		mesh.material.needsUpdate = true;
 
@@ -416,9 +408,11 @@ function ScreenshotsAndroid() {
 		window.scene.add(mesh);
 
 		self.objects.title.mesh = {
-						mesh : mesh,
-						target : target
-						};
+			mesh : mesh,
+			target : target
+		};
+
+		console.log(target);
 	}
 
 	/**
@@ -491,7 +485,7 @@ function ScreenshotsAndroid() {
 	* @param {String}    Wallet    Behalf of the wallet.
 	* @param {object}     mesh     Wallet.	
 	*/ 
-	function showTitle(wallet, mesh) {
+	function titleVisibility(wallet, mesh, option) {
 
 		var _mesh = self.objects.title.mesh.mesh,
 			target = {};
@@ -501,7 +495,10 @@ function ScreenshotsAndroid() {
 		_mesh.material.map = self.objects.title.texture[wallet]; 
 		_mesh.material.needsUpdate = true;
 
-		animate(_mesh, target.show, 2000);
+		if(option === 'show')
+			animate(_mesh, target.show, 2000);
+		else
+			animate(_mesh, target.hide, 2000);
 	}
 
 	/**
@@ -538,7 +535,6 @@ function ScreenshotsAndroid() {
 			id = 0,
 			mesh = null,
             target = {};
-            
 
 		for(var i = 0; i < self.objects.mesh.length; i++){
 			if(self.objects.mesh[i].userData.wallet === wallet){
@@ -554,11 +550,10 @@ function ScreenshotsAndroid() {
 		target = window.helper.fillTarget(position.x, position.y, 0, 'table');
 
 		animate(mesh, target.show, 1000, function(){
-	   			window.camera.enable();
-	   			window.camera.setFocus(mesh, new THREE.Vector4(0, 0, window.TILE_DIMENSION.width - window.TILE_SPACING, 1), 1000);
-	   			positionFocus(id);
-			});
-
+	   		window.camera.enable();
+	   		window.camera.setFocus(mesh, new THREE.Vector4(0, 0, window.TILE_DIMENSION.width - window.TILE_SPACING, 1), 1000);
+	   		positionFocus(id);
+		});
 	}
 
 	/**
@@ -570,9 +565,8 @@ function ScreenshotsAndroid() {
 
 		var sum = 0;
 		
-		for(var i in CONTROL[wallet]){
+		for(var i in CONTROL[wallet])
 			sum++;
-		}
 
 		return sum;
 	}
@@ -592,7 +586,8 @@ function ScreenshotsAndroid() {
 			_countControl = countControl(wallet),
 			x = POSITION_X;
 
-		showTitle(wallet, mesh);
+		console.log(wallet);
+		titleVisibility(wallet, mesh, 'show');
 			
 		target = window.helper.fillTarget(mesh.position.x - (x / 2), mesh.position.y, mesh.position.z, 'table');
         

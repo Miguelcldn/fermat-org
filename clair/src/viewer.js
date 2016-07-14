@@ -256,6 +256,7 @@ function changeView() {
     window.headers.signs();
 
     window.tileManager.transform(800);
+    window.screenshotsAndroid.hide();
 
 }
 

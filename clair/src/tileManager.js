@@ -659,6 +659,8 @@ function TileManager() {
 
         self.transform();
 
+        setTimeout(window.screenshotsAndroid.show, duration);
+
         //window.changeView(self.lastTargets);
     };
 
@@ -790,7 +792,7 @@ function TileManager() {
             .onUpdate(render)
             .start();
 
-        window.screenshotsAndroid.hide();
+        //window.screenshotsAndroid.hide();
         window.signLayer.letAloneSignLayer();
     };
 
