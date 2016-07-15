@@ -144,7 +144,7 @@ function init() {
                           dimensions.layersQtty, dimensions.superLayerPosition);
 
     // uncomment for performance testing
-    create_stats();
+    //create_stats();
 
     $('#backButton').click(function() {
 
