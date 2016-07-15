@@ -169,7 +169,7 @@ function SignLayer(){
 
 	this.transformSignLayer = function(name,option){
         
-        var duration = 5000;
+        var duration = 3000;
 
         for(var i = 0, l = objects.length; i < l; i++) {
             var res = objects[i].name.slice(0,3);

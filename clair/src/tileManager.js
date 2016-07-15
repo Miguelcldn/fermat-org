@@ -971,7 +971,7 @@ function TileManager() {
 
             delay = delay || 0;
 
-            var duration = 4000;
+            var duration = 2500;
 
              var move = new TWEEN.Tween(object.position)
                         .to({
@@ -997,22 +997,21 @@ function TileManager() {
             return move;
         };
 
-        var delay = 500;
+        var delay = 0;
         
         for(var j = 0; j < self.elementsByGroup[id].length; j++) {
             var index = self.elementsByGroup[id][j];
             var target = window.helper.getSpecificTile(index);
+            var animate;
             if(visibility === 'show')
-                var animation = noitamina(target.mesh, target.target.show, delay);
+                animate = noitamina(target.mesh, target.target.show, delay).start();
             else
-                var animation = noitamina(target.mesh, target.target.hide, delay);
-
-            animation.start();   
+                animate = noitamina(target.mesh, target.target.hide, delay).start();
         }
 
         new TWEEN.Tween(this)
-            .to({}, 4000 * 2 + self.elementsByGroup * 500)
+            .to({}, 0)
             .onUpdate(render)
             .start();
-    }
+    };
 }

@@ -78,9 +78,8 @@ function ScreenshotsAndroid() {
 						self.objects.target.splice(i,1);
 
 						animate(mesh, target.hide, 1000, function(){
-
 							window.scene.remove(mesh);
-						 }); 
+						}); 
 					}
 				}
 			}

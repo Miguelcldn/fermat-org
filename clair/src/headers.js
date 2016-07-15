@@ -55,11 +55,7 @@ function Headers(columnWidth, superLayerMaxHeight, groupsQtty, layersQtty, super
                     status[target.userData.id] = 'on';
                 }
             }
-            
-            setTimeout(function(){
-                self.signs();
-            }, 2000);
-            
+            self.showSignlayers();
         }
     };
 
@@ -70,30 +66,30 @@ function Headers(columnWidth, superLayerMaxHeight, groupsQtty, layersQtty, super
                 status[i] = 'off';
             }
         }
-        self.signs();
-    }
+        self.showSignlayers();
+    };
 
-    this.createComp = function(id){
+    this.showGroup = function(id){
         var res = id.slice(0,3);
         for(i = 0, l = objects.length; i < l; i++){
             if(objects[i].name === res){
                 if(status[i] === 'off'){
                     tileVisibility(i, 'show');
                     status[i] = 'on';
-                    self.signs();
+                    self.showSignlayers();
                 }
             }
         }
-    }
+    };
 
-    this.signs = function(){
+    this.showSignlayers = function(){
         for(i = 0, l = objects.length; i < l; i++){
             if(status[i] === 'on')
                 window.signLayer.transformSignLayer(objects[i].name, 'set');
             else
                 window.signLayer.transformSignLayer(objects[i].name, 'remove');
         }
-    }
+    };
 
     function tileVisibility(id, visibility){
         window.tileManager.materialize(visibility, id);

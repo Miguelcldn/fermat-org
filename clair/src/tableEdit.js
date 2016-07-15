@@ -368,7 +368,7 @@ function TableEdit() {
 
                     window.camera.move(target.show.position.x, target.show.position.y, target.show.position.z + 8000, 3000);
 
-                    window.headers.createComp(object.id);
+                    window.headers.showGroup(object.id);
 
                     animate(mesh, target.show, 3500, function(){
                         window.screenshotsAndroid.hidePositionScreenshots(platform, layer); 
@@ -826,7 +826,7 @@ function TableEdit() {
 
                 window.tileManager.transform(false, 1000);
                 window.headers.transformTable(1000);
-                window.headers.signs();
+                window.headers.showSignlayers();
 
                 window.camera.move(positionCameraX, positionCameraY, 8000, 2000);
 
