@@ -436,29 +436,49 @@ function Developer (){
 
     this.showDeveloperTiles = function(id){
 
+        var dragTile = function(mesh, section, center) {
+
+            var move = new TWEEN.Tween(mesh.position)
+                        .to({
+                            x : (center.x + (section % 5) * window.TILE_DIMENSION.width) - 450,
+                            y : (center.y - Math.floor(section / 5) * window.TILE_DIMENSION.height) - 440,
+                            z : 0
+                        },Math.random() * 2500 + 2500)
+                        .easing(TWEEN.Easing.Exponential.InOut)
+                        .onComplete(function() { mesh.userData.flying = false; });
+
+            var rotation = new TWEEN.Tween(mesh.rotation)
+                            .to({
+                                x: 0,
+                                y: 0,
+                                z: 0
+                            },Math.random() * 2500 + 2500)
+                            .easing(TWEEN.Easing.Exponential.InOut);
+
+            move.onStart(function() { rotation.start(); });
+
+            return move;
+        };
+
         var section = 0;
         var center = objectsDeveloper[id].position;
 
         for(var i = 0; i < window.tilesQtty.length; i++){
 
             var tile = window.helper.getSpecificTile(window.tilesQtty[i]).data;
-
             var mesh = window.helper.getSpecificTile(window.tilesQtty[i]).mesh;
 
             if(tile.author === objectsDeveloper[id].name && !isNaN(mesh.position.y)){
-
-                new TWEEN.Tween(mesh.position)
-                .to({
-                    x : (center.x + (section % 5) * window.TILE_DIMENSION.width) - 450,
-                    y : (center.y - Math.floor(section / 5) * window.TILE_DIMENSION.height) - 440,
-                    z : 0
-                }, 2000)
-                .easing(TWEEN.Easing.Exponential.InOut)
-                .start();
-
+                var move = dragTile(mesh, section, center).start();
+                window.headers.status[tile.platformID] = 'on';
                 section += 1;
             }
         }
+
+        new TWEEN.Tween(this)
+            .to({}, 5000)
+            .onUpdate(render)
+            .start();
     };
 
     /**

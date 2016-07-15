@@ -144,14 +144,15 @@ function ViewManager() {
                     };
 
                     backButton = reset = function() {
-                        //setTimeout(function(){
+                        setTimeout(function(){
                             window.developer.animateDeveloper();
-                        //}, 2000);
-
+                        }, 500);
+                        window.headers.hideTable();
                         window.changeView();
                     };
 
                     exit = function() {
+                        window.headers.hideTable();
                         window.developer.delete();
                     };
 
