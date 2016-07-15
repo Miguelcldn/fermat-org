@@ -74,7 +74,7 @@ function ViewManager() {
 
                     exit = function() {
                         window.headers.hideTable();
-                        window.tileManager.rollBack();
+                        //window.tileManager.rollBack();
                         buttonsManager.removeAllButtons();
                     };
 
