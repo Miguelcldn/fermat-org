@@ -253,7 +253,7 @@ function changeView() {
     window.workFlowManager.getActualFlow();
 
     window.headers.transformTable(1500);
-    window.headers.signs();
+    window.headers.showSignlayers();
 
     window.tileManager.transform(800);
     window.screenshotsAndroid.hide();
