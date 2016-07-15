@@ -248,10 +248,6 @@ function changeView() {
     window.camera.enable();
     window.camera.loseFocus();
 
-    window.helper.show('container', 2000);
-
-    window.workFlowManager.getActualFlow();
-
     window.headers.transformTable(1500);
     window.headers.showSignlayers();
 

@@ -79,7 +79,7 @@ function ViewManager() {
                     };
 
                     reset = function() {
-                        //window.tileManager.rollBack();
+                        window.changeView();
                     };
 
                     break;
@@ -148,7 +148,7 @@ function ViewManager() {
                             window.developer.animateDeveloper();
                         }, 500);
                         window.headers.hideTable();
-                        window.changeView();
+                        window.helper.hideBackButton();
                     };
 
                     exit = function() {

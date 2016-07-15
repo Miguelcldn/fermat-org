@@ -580,6 +580,7 @@ function TileManager() {
     this.transform = function (duration) {
 
         var i, l, j,
+            animation = undefined,
             DELAY = 500;
 
         duration = duration || 1000;
@@ -624,7 +625,7 @@ function TileManager() {
 
                     var index = self.elementsByGroup[k][j];
                     var target = window.helper.getSpecificTile(index);
-                    var animation = animate(target.mesh, target.target.show, 0);
+                    animation = animate(target.mesh, target.target.show, 0);
                     animation.start();
      
                 }
@@ -638,11 +639,12 @@ function TileManager() {
             }
         }
 
-
-        new TWEEN.Tween(this)
-            .to({}, duration * 2 + self.elementsByGroup * DELAY)
-            .onUpdate(render)
-            .start();
+        if(animation !== undefined){
+            new TWEEN.Tween(this)
+                .to({}, duration * 2 + self.elementsByGroup * DELAY)
+                .onUpdate(render)
+                .start();
+        }
     };
 
     /**
