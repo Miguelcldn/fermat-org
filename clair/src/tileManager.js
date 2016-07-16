@@ -581,6 +581,7 @@ function TileManager() {
 
         var i, l, j,
             animation = undefined,
+            tilesShown = 0,
             DELAY = 500;
 
         duration = duration || 1000;
@@ -622,12 +623,13 @@ function TileManager() {
 
             if(window.headers.status[k] === 'on'){
                 for(j = 0; j < self.elementsByGroup[k].length; j++) {
-
                     var index = self.elementsByGroup[k][j];
                     var target = window.helper.getSpecificTile(index);
-                    animation = animate(target.mesh, target.target.show, 0);
-                    animation.start();
-     
+                    if(target.mesh.position !== target.target.show.position){
+                        animation = animate(target.mesh, target.target.show, delay);
+                        animation.start();
+                        tilesShown++;
+                    }
                 }
             }
         }
@@ -641,7 +643,7 @@ function TileManager() {
 
         if(animation !== undefined){
             new TWEEN.Tween(this)
-                .to({}, duration * 2 + self.elementsByGroup * DELAY)
+                .to({}, duration * 2 + tilesShown * (DELAY / 2))
                 .onUpdate(render)
                 .start();
         }
@@ -1012,7 +1014,7 @@ function TileManager() {
         }
 
         new TWEEN.Tween(this)
-            .to({}, 0)
+            .to({}, 2500 * 2 + self.elementsByGroup[id].length * 200)
             .onUpdate(render)
             .start();
     };

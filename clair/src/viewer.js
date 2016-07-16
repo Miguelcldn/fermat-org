@@ -245,15 +245,15 @@ function initMenu() {
 
 function changeView() {
 
-    window.camera.enable();
-    window.camera.loseFocus();
+    window.tileManager.transform();
 
     window.headers.transformTable(1500);
     window.headers.showSignlayers();
 
-    window.tileManager.transform(800);
     window.screenshotsAndroid.hide();
 
+    window.camera.enable();
+    window.camera.loseFocus(); 
 }
 
 /**

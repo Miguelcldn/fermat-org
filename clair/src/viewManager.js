@@ -148,7 +148,6 @@ function ViewManager() {
                             window.developer.animateDeveloper();
                         }, 500);
                         window.headers.hideTable();
-                        window.helper.hideBackButton();
                     };
 
                     exit = function() {
