@@ -474,11 +474,6 @@ function Developer (){
                 section += 1;
             }
         }
-
-        new TWEEN.Tween(this)
-            .to({}, 5000)
-            .onUpdate(render)
-            .start();
     };
 
     /**

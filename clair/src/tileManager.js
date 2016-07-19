@@ -640,13 +640,6 @@ function TileManager() {
                 window.headersUp = true;
             }
         }
-
-        if(animation !== undefined){
-            new TWEEN.Tween(this)
-                .to({}, duration * 2 + tilesShown * (DELAY / 2))
-                .onUpdate(render)
-                .start();
-        }
     };
 
     /**
@@ -1012,10 +1005,5 @@ function TileManager() {
             else
                 animate = noitamina(target.mesh, target.target.hide, delay).start();
         }
-
-        new TWEEN.Tween(this)
-            .to({}, 2500 * 2 + self.elementsByGroup[id].length * 200)
-            .onUpdate(render)
-            .start();
     };
 }
