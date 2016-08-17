@@ -196,8 +196,8 @@ router.put('/:comp_id/life-cicles/:life_cicle_id', function(req, res, next) {
  * @apiParam {ObjectId} comp_id    Unique identifier of the component.
  * @apiParam {ObjectId} dev_id    Unique identifier of the developer.
  * @apiParam {String} role  Role name.
- * @apiParam {String} scope    xxxxx.
- * @apiParam {Number} percnt    xxxx.
+ * @apiParam {String} scope xxxxx.
+ * @apiParam {Number} percnt xxxx.
  * @apiGroup Repo-Comp
  * @apiDescription Add component to developer.
  */
