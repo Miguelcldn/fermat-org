@@ -112,7 +112,7 @@ router.post('/', function(req, res, next) {
  * @apiVersion 0.0.1
  * @apiName ListLayers
  * @apiGroup Repo-Layer
- * @apiDescription get a list of layer to the architecture of fermat.
+ * @apiDescription Get a list of layer to the architecture of fermat.
  */
 router.get('/', function(req, res, next) {
 	'use strict';

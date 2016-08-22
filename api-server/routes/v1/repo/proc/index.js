@@ -143,6 +143,7 @@ router.get('/', function(req, res, next) {
  * @apiParam {String} title Step title.
  * @apiParam {String} desc Step description.
  * @apiParam {Number} order Indicates the position where the step this with respect to other.
+ * @apiParam {String} next Id the next process.
  * @apiDescription Adds a step to the process.
  */
 router.post('/:proc_id/steps', function(req, res, next) {
