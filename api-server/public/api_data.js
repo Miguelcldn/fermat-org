@@ -513,14 +513,14 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "scope",
-            "description": "<p>xxxxx.</p>"
+            "description": "<p>Scope developer.</p>"
           },
           {
             "group": "Parameter",
             "type": "Number",
             "optional": false,
             "field": "percnt",
-            "description": "<p>xxxx.</p>"
+            "description": "<p>Percentage of development.</p>"
           }
         ]
       }
@@ -718,21 +718,21 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "role",
-            "description": "<p>xxxx.</p>"
+            "description": "<p>Role developer.</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
             "optional": false,
             "field": "scope",
-            "description": "<p>xxxxx.</p>"
+            "description": "<p>Scope developer.</p>"
           },
           {
             "group": "Parameter",
             "type": "Number",
             "optional": false,
             "field": "percnt",
-            "description": "<p>xxxx.</p>"
+            "description": "<p>Percentage of development.</p>"
           }
         ]
       }
