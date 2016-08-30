@@ -37,12 +37,12 @@ exports.insertExRate = function(exRate_mdl, callback) {
  *
  * @return {[type]}   [description]
  */
-exports.findExRate = function(callback) {
+exports.findExRate = function(res, callback) {
     'use strict';
     exRateDao.Schema.findOne()
         .where({})
         .sort('-timestamp')
         .exec(function(err, doc) {
-            callback(err, doc);
+            callback(err, doc, res);
         });
 };

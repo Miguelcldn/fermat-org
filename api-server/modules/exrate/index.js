@@ -9,16 +9,16 @@ var ExRateMdl = require('./models/exrate');
  * @param {[type]}   price
  * @param [Function] callback
  */
-exports.insertExRate = function(price, callback) {
+exports.insertExRate = function(price, res, callback) {
     var exRate_mdl = new ExRateMdl(price, Date.now());
     exRateSrv.insertExRate(exRate_mdl, function(err, exRate) {
         if (err) {
-            return callback(err, null);
+            return callback(err, null, res);
         }
-        return callback(null, exRate);
+        return callback(null, exRate, res);
     });
 }
 
-exports.findExRate = function(callback) {
-    exRateSrv.findExRate(callback);
+exports.findExRate = function(res, callback) {
+    exRateSrv.findExRate(res, callback);
 }
