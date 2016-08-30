@@ -33,13 +33,13 @@ class TileManager {
     qualities = {};
     platformsQtty;
 
-    onClick(target) {
+    onClick(target : THREE.Object3D) : void {
         if (globals.actualView === 'table')
             onElementClick(target.userData.id);
     };
 
-    JsonTile(callback) {
-        $.get("json/config_tile.json", {}, function (json) {
+    JsonTile(callback: (Object) => void): void {
+        $.get("json/config_tile.json", {}, (json) => {
             this.jsonTile = json;
             this.qualities = this.jsonTile.qualities;
             callback();
@@ -49,7 +49,7 @@ class TileManager {
     /**
      * Pre-computes the space layout for next draw
      */
-    preComputeLayout() {
+    preComputeLayout(): void {
 
         let SUPER_LAYER_SEPARATION = 3;
 
@@ -183,7 +183,7 @@ class TileManager {
         }
     };
 
-    fillTable(list) {
+    fillTable(list: Object): void {
         let _suprlays = list.suprlays,
             _platfrms = list.platfrms,
             _layers = list.layers,
@@ -333,7 +333,7 @@ class TileManager {
      * @param   {Number} scale      Scale of the pictures, the bigger, the better but heavier
      * @returns {Object} The drawn texture
      */
-    createTexture(id, quality, tileWidth, tileHeight, scale, _table) {
+    createTexture(id:number, quality:string, tileWidth:number, tileHeight:number, scale:number, _table?:Object):THREE.Texture {
 
         let tile = _table || Helper.getSpecificTile(id).data;
 
@@ -546,7 +546,7 @@ class TileManager {
      * @returns {DOMElement} The drawable element that represents the tile
      */
 
-    createElement(id, _table?) {
+    createElement(id:number, _table?:Object):THREE.LOD {
 
         let mesh,
             element = new THREE.LOD(),
@@ -575,7 +575,7 @@ class TileManager {
 
             mesh.userData = {
                 id: id,
-                onClick: onClick
+                onClick: this.onClick
             };
             mesh.renderOrder = 1;
             element.addLevel(mesh, this.levels[level]);
@@ -592,7 +592,7 @@ class TileManager {
      * @param {Array}  goal     Member of ViewManager.targets
      * @param {Number} duration Milliseconds of animation
      */
-    transform(ordered = false, duration = 2000) {
+    transform(ordered?:boolean, duration?:number){
 
         let i, l, j,
             DELAY = 500;
@@ -602,7 +602,7 @@ class TileManager {
 
         //TWEEN.removeAll();
 
-        let animate = function (object, target, delay) {
+        let animate = (object, target, delay) => {
 
             delay = delay || 0;
 
@@ -614,7 +614,7 @@ class TileManager {
                 }, Math.random() * duration + duration)
                 .easing(TWEEN.Easing.Exponential.InOut)
                 .delay(delay)
-                .onComplete(function () { object.userData.flying = false; });
+                .onComplete(() => { object.userData.flying = false; });
 
             let rotation = new TWEEN.Tween(object.rotation)
                 .to({
@@ -625,7 +625,7 @@ class TileManager {
                 .delay(delay)
                 .easing(TWEEN.Easing.Exponential.InOut);
 
-            move.onStart(function () { rotation.start(); });
+            move.onStart(() => { rotation.start(); });
 
             return move;
         };
@@ -769,7 +769,7 @@ class TileManager {
      * @param {Array}  [ids]           The IDs to let alone
      * @param {Number} [duration=2000] Duration of the animation
      */
-    letAlone(ids = [], duration = 2000) {
+    letAlone(ids:Array, duration?:number) {
 
         let i, _duration = duration || 2000,
             distance = globals.camera.getMaxDistance() * 2,
@@ -779,7 +779,7 @@ class TileManager {
 
         let target;
 
-        let animate = function (object, target, dur) {
+        let animate = (object, target, dur) => {
 
             new TWEEN.Tween(object.position)
                 .to({
@@ -788,7 +788,7 @@ class TileManager {
                     z: target.z
                 }, dur)
                 .easing(TWEEN.Easing.Exponential.InOut)
-                .onComplete(function () {
+                .onComplete(() => {
                     object.userData.flying = false;
                 })
                 .start();
@@ -854,14 +854,14 @@ class TileManager {
      * @param {Object} ctx     Canvas context
      * @param {Object} texture The texture object to update
      */
-    drawPicture(data, ctx, texture) {
+    drawPicture(data : any[], ctx:any, texture:any) {
 
         let image = new Image();
         let actual = data.shift();
 
         if (actual && actual.src && actual.src != 'undefined') {
 
-            image.onload = function () {
+            image.onload = () => {
 
                 if (!actual.skip) {
                     ctx.drawImage(image, actual.x, actual.y, actual.w, actual.h);
@@ -870,6 +870,8 @@ class TileManager {
                     texture.needsUpdate = true;
 
                 if (data.length !== 0) {
+                    
+                    if (!data[0]) data.shift();
 
                     if (data[0].text)
                         this.drawText(data, ctx, texture);
@@ -878,7 +880,7 @@ class TileManager {
                 }
             };
 
-            image.onerror = function () {
+            image.onerror = () => {
                 if (data.length !== 0) {
                     if (data[0].text)
                         this.drawText(data, ctx, texture);
@@ -905,7 +907,7 @@ class TileManager {
      * @param {Object} ctx     Canvas Context
      * @param {Object} texture Texture to update
      */
-    drawText(data, ctx, texture) {
+    drawText(data: any[], ctx:any, texture:any) {
 
         let actual = data.shift();
 
@@ -958,7 +960,7 @@ class TileManager {
      * @param   {string} role  The role to look for
      * @returns {object} The best developer by the given criteria
      */
-    getBestDev(_devs, role): AuthorData {
+    getBestDev(_devs:Array, role:string): AuthorData {
         let dev: any = {};
         if (_devs) {
             let _dev: any;
