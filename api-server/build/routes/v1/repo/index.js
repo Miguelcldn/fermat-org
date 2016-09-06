@@ -41,6 +41,8 @@ var auth = function (req, res, next) {
 			});
 		}
 	});
+	//req.body.usr_id = req.params.usr_id;
+	//next();
 };
 /**
  *
@@ -99,6 +101,19 @@ router.get('/comps/reload', function (req, res, next) {
 router.get('/comps', function (req, res, next) {
 	'use strict';
 	try {
+		/*var body = cache.getBody(req);
+		if (body) {
+		    // we send it
+		    res.status(200).send(body);
+		    repMod.getComps(req, function (error, result) {
+		        if (error) {
+		            winston.log('error', 'Error: ', error);
+		        } else {
+		            // we save it
+		            cache.setBody(req, result);
+		        }
+		    });
+		} else {*/
 		// we create it
 		repMod.getComps(req, function (error, result) {
 			if (error) {
@@ -109,6 +124,7 @@ router.get('/comps', function (req, res, next) {
 				res.status(200).send(result);
 			}
 		});
+		//}
 	} catch (err) {
 		next(err);
 	}
@@ -123,6 +139,19 @@ router.get('/comps', function (req, res, next) {
 router.get('/devs', function (req, res, next) {
 	'use strict';
 	try {
+		/*var body = cache.getBody(req);
+		if (body) {
+		    // we send it
+		    res.status(200).send(body);
+		    repMod.getDevs(req, function (error, result) {
+		        if (error) {
+		            winston.log('error', 'Error: ', error);
+		        } else {
+		            // we save it
+		            cache.setBody(req, result);
+		        }
+		    });
+		} else {*/
 		// we create it
 		repMod.getDevs(req, function (error, result) {
 			if (error) {
@@ -133,6 +162,7 @@ router.get('/devs', function (req, res, next) {
 				res.status(200).send(result);
 			}
 		});
+		//}
 	} catch (err) {
 		next(err);
 	}
@@ -147,6 +177,20 @@ router.get('/devs', function (req, res, next) {
 router.get('/procs', function (req, res, next) {
 	'use strict';
 	try {
+		// we search for body in cache
+		/*var body = cache.getBody(req);
+		if (body) {
+		    // we send it
+		    res.status(200).send(body);
+		    repMod.getProcs(req, function (error, result) {
+		        if (error) {
+		            winston.log('error', 'Error: ', error);
+		        } else {
+		            // we save it
+		            cache.setBody(req, result);
+		        }
+		    });
+		} else {*/
 		// we create it
 		repMod.getProcs(req, function (error, result) {
 			if (error) {
@@ -157,6 +201,7 @@ router.get('/procs', function (req, res, next) {
 				res.status(200).send(result);
 			}
 		});
+		//}
 	} catch (err) {
 		next(err);
 	}
@@ -259,4 +304,5 @@ router.get('/manifest/check', function (req, res, next) {
 		next(err);
 	}
 });
+//
 module.exports = router;

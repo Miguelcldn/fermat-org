@@ -127,44 +127,6 @@ define({ "api": [
   },
   {
     "type": "post",
-    "url": "/v1/issues/report",
-    "title": "create new issue",
-    "version": "0.0.1",
-    "name": "CreateIssue",
-    "group": "Issues",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "stack",
-            "description": "<p>The stack trace</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "env",
-            "description": "<p>The environment</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "Object",
-            "optional": false,
-            "field": "variables",
-            "description": "<p>The object variables</p>"
-          }
-        ]
-      }
-    },
-    "description": "<p>Creates a new issue. All the parameters must be enclosed in a json string.</p>",
-    "filename": "routes/v1/issues/index.js",
-    "groupTitle": "Issues"
-  },
-  {
-    "type": "post",
     "url": "/v1/net/waves",
     "title": "create a wave",
     "name": "CreateWave",
@@ -513,14 +475,14 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "scope",
-            "description": "<p>Scope developer.</p>"
+            "description": "<p>xxxxx.</p>"
           },
           {
             "group": "Parameter",
             "type": "Number",
             "optional": false,
             "field": "percnt",
-            "description": "<p>Percentage of development.</p>"
+            "description": "<p>xxxx.</p>"
           }
         ]
       }
@@ -718,21 +680,21 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "role",
-            "description": "<p>Role developer.</p>"
+            "description": "<p>xxxx.</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
             "optional": false,
             "field": "scope",
-            "description": "<p>Scope developer.</p>"
+            "description": "<p>xxxxx.</p>"
           },
           {
             "group": "Parameter",
             "type": "Number",
             "optional": false,
             "field": "percnt",
-            "description": "<p>Percentage of development.</p>"
+            "description": "<p>xxxx.</p>"
           }
         ]
       }
@@ -887,7 +849,7 @@ define({ "api": [
     "version": "0.0.1",
     "name": "ListLayers",
     "group": "Repo_Layer",
-    "description": "<p>Get a list of layer to the architecture of fermat.</p>",
+    "description": "<p>get a list of layer to the architecture of fermat.</p>",
     "filename": "routes/v1/repo/layer/index.js",
     "groupTitle": "Repo_Layer"
   },
@@ -1142,14 +1104,7 @@ define({ "api": [
             "type": "String",
             "optional": false,
             "field": "desc",
-            "description": "<p>Process description.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "tags",
-            "description": "<p>Labels issues. Example (a, b, c).</p>"
+            "description": "<p>Process description</p>"
           },
           {
             "group": "Parameter",
@@ -1223,13 +1178,6 @@ define({ "api": [
             "optional": false,
             "field": "order",
             "description": "<p>Indicates the position where the step this with respect to other.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "next",
-            "description": "<p>Id the next process.</p>"
           }
         ]
       }
@@ -1365,13 +1313,6 @@ define({ "api": [
             "optional": false,
             "field": "desc",
             "description": "<p>Process description.</p>"
-          },
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "tags",
-            "description": "<p>Labels issues. Example (a, b, c).</p>"
           },
           {
             "group": "Parameter",

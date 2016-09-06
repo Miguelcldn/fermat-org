@@ -75,6 +75,7 @@ exports.findAndPopulateProc = function (query, callback) {
 							_steps.push(getStep(j));
 						}
 					}
+					//console.dir(_steps);
 					proc.steps = _steps;
 					callback(null, proc);
 				}
