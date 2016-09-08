@@ -20,6 +20,7 @@
         "src/logo.ts",
         "src/map.ts",
         "src/preloader.ts",
+        "src/reports.ts",
         "src/screenshots.ts",
         "src/session.ts",
         "src/signLayer.ts",
